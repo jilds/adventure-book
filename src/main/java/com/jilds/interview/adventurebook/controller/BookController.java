@@ -4,6 +4,7 @@ import com.jilds.interview.adventurebook.model.dto.BookRequestDTO;
 import com.jilds.interview.adventurebook.model.dto.BookResposeDTO;
 import com.jilds.interview.adventurebook.service.BookService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class BookController {
     private final BookService bookService;
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<BookResposeDTO> addbook(@RequestBody BookRequestDTO book) {
+    public ResponseEntity<BookResposeDTO> addbook(@RequestBody @Valid BookRequestDTO book) {
         BookResposeDTO bookResposeDTO = bookService.createBook(book);
         return ResponseEntity.ok(bookResposeDTO);
     }
