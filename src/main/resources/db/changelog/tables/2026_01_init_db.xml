@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <!--Create Enums Type-->
+    <changeSet id="1753996205265-1" author="JonathanSilva">
+        <sql>CREATE TYPE section_type AS ENUM ('BEGIN', 'NODE', 'END')</sql>
+        <sql>CREATE TYPE category AS ENUM ('FICTION', 'SCIENCE', 'HORROR', 'ADVENTURE', 'FANTASY')</sql>
+        <sql>CREATE TYPE difficulty AS ENUM ('EASY', 'MEDIUM', 'HARD')</sql>
+    </changeSet>
+
+    <!--INIT USER TABLE-->
+    <changeSet id="1753996205265-2" author="JonathanSilva">
+        <createTable tableName="book">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_book"/>
+            </column>
+            <column name="title" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="author" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="difficulty" type="difficulty">
+                <constraints nullable="false"/>
+            </column>
+            <column name="category" type="category">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+
+    <!--CREATE SEQUENCES-->
+    <changeSet id="1753996205265-11" author="JonathanSilva">
+        <createSequence sequenceName="book_sequence" startValue="1" incrementBy="1"/>
+    </changeSet>
+
+    <changeSet id="1753996205265-11.1" author="JonathanSilva">
+
+        <addDefaultValue tableName="book" columnName="id" defaultValueComputed="nextval('book_sequence')"/>
+
+    </changeSet>
+
+</databaseChangeLog>
