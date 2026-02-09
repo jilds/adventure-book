@@ -17,10 +17,17 @@ public class GenericSpecification<T> implements Specification<T> {
     @Override
     public Predicate toPredicate(Root<T> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
         List<Predicate> predicates = new ArrayList<>();
-
+        
         if (filters != null && !filters.isEmpty()) {
             filters.forEach((key, value) -> {
                 if (value != null) {
+                    Path<?> path = root.get(key);
+                    Class<?> fieldType = path.getJavaType();
+                    // Convert string → enum if needed
+                    if (fieldType.isEnum() && value instanceof String) {
+                        value = Enum.valueOf((Class<Enum>) fieldType, (String) value);
+                    }
+
                     if (value instanceof String) {
                         predicates.add(criteriaBuilder.like(
                             criteriaBuilder.lower(root.get(key)), "%" + value.toString().toLowerCase() + "%"

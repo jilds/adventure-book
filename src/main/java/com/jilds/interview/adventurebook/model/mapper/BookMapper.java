@@ -8,6 +8,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
+import java.util.List;
 import java.util.Objects;
 
 @Mapper(
@@ -20,5 +21,8 @@ public interface BookMapper {
     BookMapper INSTANCE = Mappers.getMapper(BookMapper.class);
 
     BookResposeDTO toBookDTO(BookEntity bookRequestDTO);
+
     BookEntity toBookEntity(BookRequestDTO bookDTO);
+
+    List<BookResposeDTO> toBookDTOList(List<BookEntity> bookEntities);
 }
