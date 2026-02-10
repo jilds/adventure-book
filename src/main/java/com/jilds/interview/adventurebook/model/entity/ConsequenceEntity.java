@@ -1,6 +1,6 @@
 package com.jilds.interview.adventurebook.model.entity;
 
-import com.jilds.interview.adventurebook.model.enums.SectionType;
+import com.jilds.interview.adventurebook.model.enums.Consequence;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,8 +14,8 @@ import java.time.Instant;
 @Getter
 @Setter
 @Entity
-@Table(name = "section")
-public class SectionEntity {
+@Table(name = "consequence")
+public class ConsequenceEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,13 +25,13 @@ public class SectionEntity {
 
     @Enumerated(EnumType.STRING)
     @JdbcTypeCode(SqlTypes.NAMED_ENUM)
-    @Column(name = "section_type", columnDefinition = "section_type")
-    private SectionType type;
+    @Column(name = "consequence", columnDefinition = "consequence")
+    private Consequence type;
 
-    private Long sectionNumber;
+    private Long value;
 
     @ManyToOne
-    private BookEntity book;
+    private OptionEntity section;
 
     @CreationTimestamp
     @Column(name = "created", nullable = false, updatable = false)

@@ -1,36 +1,33 @@
 package com.jilds.interview.adventurebook.model.entity;
 
-import com.jilds.interview.adventurebook.model.enums.SectionType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.type.SqlTypes;
 
 import java.time.Instant;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "section")
-public class SectionEntity {
+@Table(name = "adventure")
+public class AdventureEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private String text;
+    private Long currentSectionId;
 
-    @Enumerated(EnumType.STRING)
-    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
-    @Column(name = "section_type", columnDefinition = "section_type")
-    private SectionType type;
+    private Integer healthPoints = 10;
 
-    private Long sectionNumber;
+    private boolean completed = false;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    private PlayerEntity player;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     private BookEntity book;
 
     @CreationTimestamp
@@ -40,5 +37,16 @@ public class SectionEntity {
     @UpdateTimestamp
     @Column(name = "updated", insertable = false)
     private Instant updated;
+
+    public void loseHealthPoints(Integer points) {
+        this.healthPoints -= points;
+        if (this.healthPoints <= 0) {
+            this.completed = true;
+        }
+    }
+
+    public void increaseHealthPoints(Integer points) {
+        this.healthPoints += points;
+    }
 
 }

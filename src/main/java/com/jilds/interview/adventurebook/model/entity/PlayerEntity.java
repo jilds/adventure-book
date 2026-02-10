@@ -1,37 +1,26 @@
 package com.jilds.interview.adventurebook.model.entity;
 
-import com.jilds.interview.adventurebook.model.enums.SectionType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.type.SqlTypes;
 
 import java.time.Instant;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "section")
-public class SectionEntity {
+@Table(name = "player")
+public class PlayerEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private String text;
+    private String username;
 
-    @Enumerated(EnumType.STRING)
-    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
-    @Column(name = "section_type", columnDefinition = "section_type")
-    private SectionType type;
-
-    private Long sectionNumber;
-
-    @ManyToOne
-    private BookEntity book;
+    private String name;
 
     @CreationTimestamp
     @Column(name = "created", nullable = false, updatable = false)

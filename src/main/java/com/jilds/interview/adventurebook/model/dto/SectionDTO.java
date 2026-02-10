@@ -18,8 +18,8 @@ import java.util.Set;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(value = JsonInclude.Include.NON_EMPTY, content = JsonInclude.Include.NON_NULL)
 public class SectionDTO {
-    private String id;
+    private Integer id;
     private String text;
     private SectionType type;
-    private Set<OptionsDTO> options;
+    private Set<OptionDTO> options;
 }

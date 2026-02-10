@@ -23,28 +23,43 @@ public class ProblemFactory {
 
         var problem = new Problem(URI.create("about:blank"), ex.getClass().getSimpleName(), HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase(), URI.create(requestURI), null);
 
-        if(ex instanceof ValidationException validationException){
+        if (ex instanceof ValidationException validationException) {
             return new Problem(problem, validationException.getValidationErrors());
         }
 
-        if(ex instanceof MethodArgumentNotValidException methodArgumentNotValidException){
+        if (ex instanceof MethodArgumentNotValidException methodArgumentNotValidException) {
             return problemFromErrors(problem, methodArgumentNotValidException.getBindingResult());
         }
 
-        if(ex instanceof HttpMessageNotReadableException messageNotReadableException){
+        if (ex instanceof HttpMessageNotReadableException messageNotReadableException) {
             if (messageNotReadableException.getCause() instanceof InvalidFormatException invalidFormatException) {
                 var validationErrors = new ValidationError(invalidFormatException.getTargetType().getSimpleName(), invalidFormatException.getPath().getFirst().getPropertyName(), invalidFormatException.getValue(), null);
                 return new Problem(problem, List.of(validationErrors));
             }
 
             if (messageNotReadableException.getCause() instanceof StreamReadException streamReadException) {
-                var validationErrors = new ValidationError(null, null, null, streamReadException.getMessage());
+                var validationErrors = ValidationError.builder().message(streamReadException.getMessage()).build();
                 return new Problem(problem, List.of(validationErrors));
             }
         }
 
+        if (ex instanceof AdventureBookException adventureBookException) {
+            var validationErrors = ValidationError.builder().message(adventureBookException.getMessage()).build();
+            return new Problem(problem, List.of(validationErrors));
+        }
+
         return problem;
 
+    }
+
+    static Problem adventureBook(AdventureBookException ex, WebRequest webRequest) {
+        String requestURI = webRequest.getContextPath();
+
+        if (webRequest instanceof ServletWebRequest servletWebRequest) {
+            requestURI = servletWebRequest.getRequest().getRequestURI();
+        }
+
+        return new Problem(URI.create("about:blank"), ex.getClass().getSimpleName(), ex.getHttpStatus().value(), ex.getMessage(), URI.create(requestURI), null);
     }
 
     static Problem unxpected(Exception ex, WebRequest webRequest) {

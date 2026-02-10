@@ -8,8 +8,6 @@ import lombok.*;
 import tools.jackson.databind.PropertyNamingStrategies;
 import tools.jackson.databind.annotation.JsonNaming;
 
-import java.util.Set;
-
 @Getter
 @Setter
 @Builder
@@ -23,5 +21,4 @@ public class BookDTO {
     private String author;
     private Difficulty difficulty;
     private Category category;
-    private Set<SectionDTO> sections;
 }
