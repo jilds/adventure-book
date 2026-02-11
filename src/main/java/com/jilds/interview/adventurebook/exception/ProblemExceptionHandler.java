@@ -1,7 +1,6 @@
 package com.jilds.interview.adventurebook.exception;
 
 import lombok.extern.slf4j.Slf4j;
-import org.apache.coyote.Response;
 import org.jspecify.annotations.Nullable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -22,7 +21,7 @@ import org.springframework.web.util.WebUtils;
  */
 @Slf4j
 @RestControllerAdvice
-class ProblemExcptionHandler extends ResponseEntityExceptionHandler {
+class ProblemExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Override
     protected @Nullable ResponseEntity<Object> handleExceptionInternal(Exception ex, @Nullable Object body, HttpHeaders headers, HttpStatusCode statusCode, WebRequest request) {
@@ -32,6 +31,11 @@ class ProblemExcptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(value = ValidationException.class)
     protected ResponseEntity<Object> handleValidationException(ValidationException ex, WebRequest request) {
         return handleExceptionAsProblem(ex, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
+    @ExceptionHandler(value = {AdventureBookException.class})
+    protected ResponseEntity<Object> handleAdventureBookException(AdventureBookException ex, WebRequest request) {
+        return new ResponseEntity<>(ProblemFactory.adventureBook(ex, request), new HttpHeaders(), ex.getHttpStatus());
     }
 
     @Override

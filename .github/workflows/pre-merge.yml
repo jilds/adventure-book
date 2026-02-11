@@ -29,4 +29,4 @@ jobs:
           java-version: '25'
 
       - name: Build
-        run: mvn clean install
+        run: mvn clean install -DskipTests

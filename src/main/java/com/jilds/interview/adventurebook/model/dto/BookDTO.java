@@ -2,12 +2,11 @@ package com.jilds.interview.adventurebook.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.jilds.interview.adventurebook.model.enums.Category;
 import com.jilds.interview.adventurebook.model.enums.Difficulty;
 import lombok.*;
 import tools.jackson.databind.PropertyNamingStrategies;
 import tools.jackson.databind.annotation.JsonNaming;
-
-import java.util.Set;
 
 @Getter
 @Setter
@@ -21,5 +20,5 @@ public class BookDTO {
     private String title;
     private String author;
     private Difficulty difficulty;
-    private Set<SectionDTO> sections;
+    private Category category;
 }

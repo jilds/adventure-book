@@ -1,37 +1,29 @@
 package com.jilds.interview.adventurebook.model.entity;
 
-import com.jilds.interview.adventurebook.model.enums.SectionType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.hibernate.type.SqlTypes;
 
 import java.time.Instant;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "section")
-public class SectionEntity {
+@Table(name = "option")
+public class OptionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    private String text;
+    private String description;
 
-    @Enumerated(EnumType.STRING)
-    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
-    @Column(name = "section_type", columnDefinition = "section_type")
-    private SectionType type;
-
-    private Long sectionNumber;
+    private Integer nextSectionNumber;
 
     @ManyToOne
-    private BookEntity book;
+    private SectionEntity section;
 
     @CreationTimestamp
     @Column(name = "created", nullable = false, updatable = false)
@@ -40,5 +32,4 @@ public class SectionEntity {
     @UpdateTimestamp
     @Column(name = "updated", insertable = false)
     private Instant updated;
-
 }

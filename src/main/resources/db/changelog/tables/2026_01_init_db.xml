@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <!--Create Enums Type-->
+    <changeSet id="1753996205265-1" author="JonathanSilva">
+        <sql>CREATE TYPE section_type AS ENUM ('BEGIN', 'NODE', 'END')</sql>
+        <sql>CREATE TYPE category AS ENUM ('FICTION', 'SCIENCE', 'HORROR', 'ADVENTURE', 'FANTASY')</sql>
+        <sql>CREATE TYPE difficulty AS ENUM ('EASY', 'MEDIUM', 'HARD')</sql>
+        <sql>CREATE TYPE consequence_type AS ENUM ('GAIN_HEALTH', 'LOSE_HEALTH')</sql>
+    </changeSet>
+
+    <!--INIT USER TABLE-->
+    <changeSet id="1753996205265-2" author="JonathanSilva">
+        <createTable tableName="book">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_book"/>
+            </column>
+            <column name="title" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="author" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="difficulty" type="difficulty">
+                <constraints nullable="false"/>
+            </column>
+            <column name="category" type="category">
+                <constraints nullable="true"/>
+            </column>
+            <column name="created" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1753996205265-3" author="JonathanSilva">
+        <createTable tableName="section">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_section"/>
+            </column>
+            <column name="text" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="section_type">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sectionNumber" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="book_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1753996205265-3.1" author="JonathanSilva">
+        <addForeignKeyConstraint baseColumnNames="book_id" baseTableName="section"
+                                 constraintName="fk_book_id" referencedColumnNames="id"
+                                 referencedTableName="book"/>
+    </changeSet>
+
+    <changeSet id="1753996205265-4" author="JonathanSilva">
+        <createTable tableName="option">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_option"/>
+            </column>
+            <column name="description" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="next_section_number" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="section_id" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="created" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1753996205265-4.1" author="JonathanSilva">
+        <addForeignKeyConstraint baseColumnNames="section_id" baseTableName="option"
+                                 constraintName="fk_section_id" referencedColumnNames="id"
+                                 referencedTableName="section"/>
+    </changeSet>
+
+    <changeSet id="1753996205265-5" author="JonathanSilva">
+        <createTable tableName="consequence">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_consequence"/>
+            </column>
+            <column name="text" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="consequence_type">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="option_id" type="BIGINT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="created" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1753996205265-5.1" author="JonathanSilva">
+        <addForeignKeyConstraint baseColumnNames="option_id" baseTableName="consequence"
+                                 constraintName="fk_option_id" referencedColumnNames="id"
+                                 referencedTableName="option"/>
+    </changeSet>
+
+    <changeSet id="1753996205265-6" author="JonathanSilva">
+        <createTable tableName="player">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_player"/>
+            </column>
+            <column name="username" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1753996205265-7" author="JonathanSilva">
+        <createTable tableName="adventure">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_adventure"/>
+            </column>
+            <column name="current_section_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="health_points" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="completed" type="BOOLEAN">
+                <constraints nullable="false" />
+            </column>
+            <column name="player_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="book_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1753996205265-7.1" author="JonathanSilva">
+        <addForeignKeyConstraint baseColumnNames="player_id" baseTableName="adventure"
+                                 constraintName="fk_player_id" referencedColumnNames="id"
+                                 referencedTableName="player"/>
+        <addForeignKeyConstraint baseColumnNames="book_id" baseTableName="adventure"
+                                 constraintName="fk_book_id" referencedColumnNames="id"
+                                 referencedTableName="book"/>
+    </changeSet>
+
+    <!--CREATE SEQUENCES-->
+    <changeSet id="1753996205265-11" author="JonathanSilva">
+        <createSequence sequenceName="adventure_sequence" startValue="1" incrementBy="1"/>
+        <createSequence sequenceName="book_sequence" startValue="1" incrementBy="1"/>
+        <createSequence sequenceName="consequence_sequence" startValue="1" incrementBy="1"/>
+        <createSequence sequenceName="option_sequence" startValue="1" incrementBy="1"/>
+        <createSequence sequenceName="player_sequence" startValue="1" incrementBy="1"/>
+        <createSequence sequenceName="section_sequence" startValue="1" incrementBy="1"/>
+    </changeSet>
+
+    <changeSet id="1753996205265-11.1" author="JonathanSilva">
+        <addDefaultValue tableName="adventure" columnName="id" defaultValueComputed="nextval('adventure_sequence')"/>
+        <addDefaultValue tableName="book" columnName="id" defaultValueComputed="nextval('book_sequence')"/>
+        <addDefaultValue tableName="consequence" columnName="id" defaultValueComputed="nextval('consequence_sequence')"/>
+        <addDefaultValue tableName="option" columnName="id" defaultValueComputed="nextval('option_sequence')"/>
+        <addDefaultValue tableName="player" columnName="id" defaultValueComputed="nextval('player_sequence')"/>
+        <addDefaultValue tableName="section" columnName="id" defaultValueComputed="nextval('section_sequence')"/>
+
+    </changeSet>
+
+</databaseChangeLog>

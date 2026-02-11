@@ -6,8 +6,6 @@ import lombok.*;
 import tools.jackson.databind.PropertyNamingStrategies;
 import tools.jackson.databind.annotation.JsonNaming;
 
-import java.util.Set;
-
 @Getter
 @Setter
 @Builder
@@ -16,8 +14,8 @@ import java.util.Set;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(value = JsonInclude.Include.NON_EMPTY, content = JsonInclude.Include.NON_NULL)
-public class OptionsDTO {
-    private String id;
+public class OptionDTO {
+    private Integer id;
     private String description;
     private Integer gotoId;
 }
