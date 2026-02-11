@@ -1,9 +1,9 @@
 package com.jilds.interview.adventurebook.service;
 
-import com.jilds.interview.adventurebook.model.dto.BookCriteriaDTO;
-import com.jilds.interview.adventurebook.model.dto.BookRequestDTO;
-import com.jilds.interview.adventurebook.model.dto.BookResposeDTO;
-import com.jilds.interview.adventurebook.model.enums.Category;
+import com.jilds.interview.adventurebook.domain.dto.BookCriteriaDTO;
+import com.jilds.interview.adventurebook.domain.dto.BookRequestDTO;
+import com.jilds.interview.adventurebook.domain.dto.BookResposeDTO;
+import com.jilds.interview.adventurebook.domain.enums.Category;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public interface BookService {
 
     List<BookResposeDTO> searchBook(BookCriteriaDTO filters);
 
-    BookResposeDTO getBookDetails(Long bookId);
+    BookResposeDTO getBookDetails(Integer bookId);
 
-    BookResposeDTO patchBookCategory(Long bookId, Category category);
+    BookResposeDTO patchBookCategory(Integer bookId, List<Category> categories);
 }

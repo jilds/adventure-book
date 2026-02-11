@@ -27,9 +27,7 @@
             <column name="difficulty" type="difficulty">
                 <constraints nullable="false"/>
             </column>
-            <column name="category" type="category">
-                <constraints nullable="true"/>
-            </column>
+            <column name="categories" type="jsonb"/>
             <column name="created" type="DATETIME">
                 <constraints nullable="false"/>
             </column>
@@ -48,7 +46,7 @@
             <column name="type" type="section_type">
                 <constraints nullable="false"/>
             </column>
-            <column name="sectionNumber" type="BIGINT">
+            <column name="section_number" type="BIGINT">
                 <constraints nullable="true"/>
             </column>
             <column name="book_id" type="BIGINT">

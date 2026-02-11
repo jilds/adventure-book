@@ -1,14 +1,15 @@
 package com.jilds.interview.adventurebook.controller;
 
-import com.jilds.interview.adventurebook.model.dto.BookCriteriaDTO;
-import com.jilds.interview.adventurebook.model.dto.BookRequestDTO;
-import com.jilds.interview.adventurebook.model.dto.BookResposeDTO;
-import com.jilds.interview.adventurebook.model.enums.Category;
+import com.jilds.interview.adventurebook.domain.dto.BookCriteriaDTO;
+import com.jilds.interview.adventurebook.domain.dto.BookRequestDTO;
+import com.jilds.interview.adventurebook.domain.dto.BookResposeDTO;
+import com.jilds.interview.adventurebook.domain.enums.Category;
 import com.jilds.interview.adventurebook.service.BookService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,7 @@ public class BookController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BookResposeDTO> addBook(@RequestBody @Valid BookRequestDTO book) {
         BookResposeDTO bookResposeDTO = bookService.createBook(book);
-        return ResponseEntity.ok(bookResposeDTO);
+        return new ResponseEntity<>(bookResposeDTO, HttpStatus.CREATED);
     }
 
     @Operation(summary = "Get books based on criteria")
@@ -37,15 +38,17 @@ public class BookController {
         return ResponseEntity.ok(responseValue);
     }
 
+    @Operation(summary = "Get book details")
     @GetMapping(value = "/{bookId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<BookResposeDTO> getBookDetails(@PathVariable Long bookId) {
+    public ResponseEntity<BookResposeDTO> getBookDetails(@PathVariable Integer bookId) {
         BookResposeDTO bookResposeDTO = bookService.getBookDetails(bookId);
         return ResponseEntity.ok(bookResposeDTO);
     }
 
+    @Operation(summary = "Update book categories, only categories will be updated, other fields will be ignored")
     @PatchMapping(value = "/{bookId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<BookResposeDTO> patchBookCategories(@PathVariable Long bookId, @RequestBody(required = false) Category category) {
-        BookResposeDTO bookResposeDTO = bookService.patchBookCategory(bookId, category);
+    public ResponseEntity<BookResposeDTO> patchBookCategories(@PathVariable Integer bookId, @RequestBody(required = false) List<Category> categories) {
+        BookResposeDTO bookResposeDTO = bookService.patchBookCategory(bookId, categories);
         return ResponseEntity.ok(bookResposeDTO);
     }
 
