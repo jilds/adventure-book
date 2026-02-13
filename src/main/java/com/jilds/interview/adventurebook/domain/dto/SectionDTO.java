@@ -13,6 +13,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(value = JsonInclude.Include.NON_EMPTY, content = JsonInclude.Include.NON_NULL)
 public class SectionDTO {
+    private Integer id;
     private Integer sectionNumber;
     private String text;
     private SectionType type;

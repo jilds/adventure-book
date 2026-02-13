@@ -11,6 +11,7 @@ import lombok.SneakyThrows;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Getter
@@ -22,7 +23,7 @@ public class BookCriteriaDTO {
     private String title;
     private String author;
     private Difficulty difficulty;
-    private Category category;
+    private List<Category> categories;
 
     @SneakyThrows
     @Hidden
@@ -30,7 +31,7 @@ public class BookCriteriaDTO {
         Map<String, Object> map = new HashMap<>();
         Field[] fields = this.getClass().getDeclaredFields();
 
-        for (Field field: fields) {
+        for (Field field : fields) {
             field.setAccessible(true);
             map.put(field.getName(), field.get(this));
         }

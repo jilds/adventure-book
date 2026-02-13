@@ -10,6 +10,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.type.SqlTypes;
 
 import java.time.Instant;
+import java.util.List;
 
 @Getter
 @Setter
@@ -41,5 +42,8 @@ public class SectionEntity {
     @UpdateTimestamp
     @Column(name = "updated", insertable = false)
     private Instant updated;
+
+    @Transient
+    private List<OptionEntity> options;
 
 }

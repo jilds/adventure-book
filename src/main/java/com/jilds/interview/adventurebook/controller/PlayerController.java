@@ -23,21 +23,21 @@ public class PlayerController {
 
     private final PlayerService playerService;
 
-    @Operation(summary = "Hey there, start an adventure")
+    @Operation(summary = "Hey there, let create a new player for you, so you can start your adventure")
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PlayerResposeDTO> createPlayer(@RequestBody @Valid PlayerRequestDTO playerRequestDTO) {
         var playerResponseDTO = playerService.createUser(playerRequestDTO);
         return new ResponseEntity<>(playerResponseDTO, HttpStatus.CREATED);
     }
 
-    @Operation(summary = "Hey there, start an adventure")
+    @Operation(summary = "What? You want to see all players? Are you sure? Ok, here you go, but don't blame me for what you see")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<PlayerResposeDTO>> getAllPlayers() {
         var playersResponseDTO = playerService.getAllPlayers();
         return ResponseEntity.ok(playersResponseDTO);
     }
 
-    @Operation(summary = "Hey there, start an adventure")
+    @Operation(summary = "Delete a player from the adventure book application.")
     @DeleteMapping(value = "/{userId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AdventurePlayResponseDTO> deletePlayer(@PathVariable Integer userId) {
         playerService.deletePlayer(userId);

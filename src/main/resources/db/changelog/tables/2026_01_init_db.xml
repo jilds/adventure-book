@@ -10,6 +10,7 @@
         <sql>CREATE TYPE category AS ENUM ('FICTION', 'SCIENCE', 'HORROR', 'ADVENTURE', 'FANTASY')</sql>
         <sql>CREATE TYPE difficulty AS ENUM ('EASY', 'MEDIUM', 'HARD')</sql>
         <sql>CREATE TYPE consequence_type AS ENUM ('GAIN_HEALTH', 'LOSE_HEALTH')</sql>
+        <sql>CREATE TYPE adventure_status AS ENUM ('IN_PROGRESS', 'WINNER', 'LOSE', 'QUIT')</sql>
     </changeSet>
 
     <!--INIT USER TABLE-->
@@ -40,7 +41,7 @@
             <column name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_section"/>
             </column>
-            <column name="text" type="VARCHAR(255)">
+            <column name="text" type="VARCHAR(1000)">
                 <constraints nullable="false"/>
             </column>
             <column name="type" type="section_type">
@@ -63,6 +64,7 @@
         <addForeignKeyConstraint baseColumnNames="book_id" baseTableName="section"
                                  constraintName="fk_book_id" referencedColumnNames="id"
                                  referencedTableName="book"/>
+        <addUniqueConstraint tableName="section" columnNames="section_number, book_id"/>
     </changeSet>
 
     <changeSet id="1753996205265-4" author="JonathanSilva">
@@ -70,7 +72,7 @@
             <column name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_option"/>
             </column>
-            <column name="description" type="VARCHAR(255)">
+            <column name="description" type="VARCHAR(1000)">
                 <constraints nullable="false"/>
             </column>
             <column name="next_section_number" type="BIGINT">
@@ -97,7 +99,7 @@
             <column name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_consequence"/>
             </column>
-            <column name="text" type="VARCHAR(255)">
+            <column name="text" type="VARCHAR(1000)">
                 <constraints nullable="false"/>
             </column>
             <column name="type" type="consequence_type">
@@ -130,7 +132,7 @@
             <column name="username" type="VARCHAR(50)">
                 <constraints nullable="false"/>
             </column>
-            <column name="name" type="VARCHAR(255)">
+            <column name="name" type="VARCHAR(100)">
                 <constraints nullable="false"/>
             </column>
             <column name="created" type="DATETIME">
@@ -151,7 +153,7 @@
             <column name="health_points" type="BIGINT">
                 <constraints nullable="false"/>
             </column>
-            <column name="completed" type="BOOLEAN">
+            <column name="status" type="adventure_status">
                 <constraints nullable="false" />
             </column>
             <column name="player_id" type="BIGINT">

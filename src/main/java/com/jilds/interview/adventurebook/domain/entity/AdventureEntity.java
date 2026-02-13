@@ -1,10 +1,13 @@
 package com.jilds.interview.adventurebook.domain.entity;
 
+import com.jilds.interview.adventurebook.domain.enums.AdventureStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.type.SqlTypes;
 
 import java.time.Instant;
 
@@ -23,7 +26,10 @@ public class AdventureEntity {
 
     private Integer healthPoints = 10;
 
-    private boolean completed = false;
+    @Enumerated(EnumType.STRING)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
+    @Column(columnDefinition = "adventure_status")
+    private AdventureStatus status;
 
     @ManyToOne
     private PlayerEntity player;
@@ -39,10 +45,13 @@ public class AdventureEntity {
     @Column(name = "updated", insertable = false)
     private Instant updated;
 
+    @Transient
+    private SectionEntity currentSection;
+
     public void loseHealthPoints(Integer points) {
         this.healthPoints -= points;
         if (this.healthPoints <= 0) {
-            this.completed = true;
+            this.status = AdventureStatus.LOSE;
         }
     }
 

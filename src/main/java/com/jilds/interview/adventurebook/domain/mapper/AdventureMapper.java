@@ -5,8 +5,8 @@ import com.jilds.interview.adventurebook.domain.entity.AdventureEntity;
 import com.jilds.interview.adventurebook.domain.entity.SectionEntity;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
-import org.mapstruct.factory.Mappers;
 
 import java.util.Objects;
 
@@ -14,11 +14,21 @@ import java.util.Objects;
         componentModel = "spring",
         builder = @Builder(disableBuilder = true),
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
-        imports = {Objects.class})
+        imports = {Objects.class},
+        uses = {SectionMapper.class})
 public interface AdventureMapper {
 
-    AdventureMapper INSTANCE = Mappers.getMapper(AdventureMapper.class);
+    @Mapping(source = "id", target = "adventureId")
+    @Mapping(source = "player.id", target = "playerId")
+    @Mapping(source = "book.id", target = "bookId")
+    @Mapping(source = "currentSection", target = "section")
+    AdventurePlayResponseDTO toAdventurePlayResponseDTO(AdventureEntity adventureEntity);
 
-    AdventurePlayResponseDTO toAdventurePlayResponseDTO(AdventureEntity adventureEntity, SectionEntity section);
+    @Mapping(source = "adventureEntity.id", target = "adventureId")
+    @Mapping(source = "adventureEntity.player.id", target = "playerId")
+    @Mapping(source = "adventureEntity.book.id", target = "bookId")
+    @Mapping(source = "sectionEntity", target = "section")
+    AdventurePlayResponseDTO toAdventurePlayResponseDTO(AdventureEntity adventureEntity, SectionEntity sectionEntity);
+
 
 }

@@ -24,21 +24,21 @@ public class BookController {
 
     private final BookService bookService;
 
-    @Operation(summary = "Add a new book")
+    @Operation(summary = "Create a new book, you know, like the one you want to read, but you don't have it yet")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BookResposeDTO> addBook(@RequestBody @Valid BookRequestDTO book) {
         BookResposeDTO bookResposeDTO = bookService.createBook(book);
         return new ResponseEntity<>(bookResposeDTO, HttpStatus.CREATED);
     }
 
-    @Operation(summary = "Get books based on criteria")
+    @Operation(summary = "Search for books based on various criteria to find that one book that matches your mood")
     @PostMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<BookResposeDTO>> getBooks(@RequestBody BookCriteriaDTO filters) {
+    public ResponseEntity<List<BookResposeDTO>> getBooks(@RequestBody(required = false) BookCriteriaDTO filters) {
         var responseValue = bookService.searchBook(filters);
         return ResponseEntity.ok(responseValue);
     }
 
-    @Operation(summary = "Get book details")
+    @Operation(summary = "Get some details about a book, because you know, to know more about that book before you decide to read it or not")
     @GetMapping(value = "/{bookId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<BookResposeDTO> getBookDetails(@PathVariable Integer bookId) {
         BookResposeDTO bookResposeDTO = bookService.getBookDetails(bookId);

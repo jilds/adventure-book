@@ -5,7 +5,6 @@ import com.jilds.interview.adventurebook.domain.entity.SectionEntity;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
-import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 import java.util.Objects;
@@ -14,10 +13,9 @@ import java.util.Objects;
         componentModel = "spring",
         builder = @Builder(disableBuilder = true),
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
-        imports = {Objects.class})
+        imports = {Objects.class},
+        uses = {OptionMapper.class})
 public interface SectionMapper {
-
-    SectionMapper INSTANCE = Mappers.getMapper(SectionMapper.class);
 
     SectionDTO toSectionDTO(SectionEntity sectionEntity);
 

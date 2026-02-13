@@ -12,5 +12,5 @@ import lombok.Setter;
 public class AdventurePlayRequestDTO {
     private Integer adventureId;
     private Integer currentSectionNumber;
-    private Integer nextSelectedSectionNumber;
+    private Integer nextSectionNumber;
 }

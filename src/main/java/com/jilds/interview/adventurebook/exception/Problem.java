@@ -22,6 +22,11 @@ public class Problem implements Serializable {
     private final URI instance;
     private final List<ValidationError> validationErrors;
 
+    public Problem(Problem problem, String message, List<ValidationError> validationErrors) {
+        validationErrors.add(ValidationError.builder().message(message).build());
+        this(problem.getType(), problem.getTitle(), problem.getStatus(), problem.getDetail(), problem.getInstance(), validationErrors);
+    }
+
     public Problem(Problem problem, List<ValidationError> validationErrors) {
         this(problem.getType(), problem.getTitle(), problem.getStatus(), problem.getDetail(), problem.getInstance(), validationErrors);
     }

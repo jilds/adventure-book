@@ -15,19 +15,20 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PlayerServiceImpl implements PlayerService {
 
+    private final PlayerMapper playerMapper;
     private final PlayerRepository playerRepository;
 
     @Override
     public PlayerResposeDTO createUser(PlayerRequestDTO playerRequestDTO) {
-        var playerEntity = PlayerMapper.INSTANCE.toPlayerEntity(playerRequestDTO);
+        var playerEntity = playerMapper.toPlayerEntity(playerRequestDTO);
         playerEntity = playerRepository.save(playerEntity);
-        return PlayerMapper.INSTANCE.toPlayerDTO(playerEntity);
+        return playerMapper.toPlayerDTO(playerEntity);
     }
 
     @Override
     public List<PlayerResposeDTO> getAllPlayers() {
         var playerEntities = playerRepository.findAll();
-        var playerDTOs = PlayerMapper.INSTANCE.toPlayerDTOList(playerEntities);
+        var playerDTOs = playerMapper.toPlayerDTOList(playerEntities);
 
         return ObjectUtils.isEmpty(playerDTOs) ? List.of() : playerDTOs;
     }

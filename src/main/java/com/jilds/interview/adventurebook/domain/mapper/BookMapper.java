@@ -6,7 +6,6 @@ import com.jilds.interview.adventurebook.domain.entity.BookEntity;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
-import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 import java.util.Objects;
@@ -17,8 +16,6 @@ import java.util.Objects;
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
         imports = {Objects.class})
 public interface BookMapper {
-
-    BookMapper INSTANCE = Mappers.getMapper(BookMapper.class);
 
     BookResposeDTO toBookDTO(BookEntity bookRequestDTO);
 

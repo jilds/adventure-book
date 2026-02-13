@@ -33,4 +33,7 @@ public class OptionEntity {
     @UpdateTimestamp
     @Column(name = "updated", insertable = false)
     private Instant updated;
+
+    @Transient
+    private ConsequenceEntity consequence;
 }

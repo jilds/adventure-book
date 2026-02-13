@@ -22,32 +22,31 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BookServiceImpl implements BookService {
 
+    private final BookMapper bookMapper;
     private final BookRepository bookRepository;
     private final SectionService sectionService;
-
-    /*private final SectionRepository sectionRepository;
-    private final OptionRepository optionRepository;
-    private final ConsequenceRepository consequenceRepository;*/
-
 
     @Override
     @Transactional
     public BookResposeDTO createBook(BookRequestDTO bookRequestDTO) {
         bookRequestDTO.isValid();
 
-        var bookEntity = BookMapper.INSTANCE.toBookEntity(bookRequestDTO);
+        var bookEntity = bookMapper.toBookEntity(bookRequestDTO);
 
         var savedBookEntity = bookRepository.save(bookEntity);
 
         sectionService.createSections(bookEntity, bookRequestDTO.getSections());
 
-        return BookMapper.INSTANCE.toBookDTO(savedBookEntity);
+        return bookMapper.toBookDTO(savedBookEntity);
     }
 
     @Override
     public List<BookResposeDTO> searchBook(BookCriteriaDTO filters) {
-        var bookEntities = bookRepository.findAll(new GenericSpecification<>(filters.getCriteriaDTO()));
-        var bookDTOs = BookMapper.INSTANCE.toBookDTOList(bookEntities);
+        var bookEntities = ObjectUtils.isEmpty(filters) ?
+                bookRepository.findAll() :
+                bookRepository.findAll(new GenericSpecification<>(filters.getCriteriaDTO()));
+
+        var bookDTOs = bookMapper.toBookDTOList(bookEntities);
 
         return ObjectUtils.isEmpty(bookDTOs) ? List.of() : bookDTOs;
     }
@@ -57,7 +56,7 @@ public class BookServiceImpl implements BookService {
         var book = bookRepository.findById(bookId)
                 .orElseThrow(() -> new AdventureBookException("Book not found with id: " + bookId, HttpStatus.NOT_FOUND));
 
-        return BookMapper.INSTANCE.toBookDTO(book);
+        return bookMapper.toBookDTO(book);
     }
 
     @Override
@@ -66,6 +65,6 @@ public class BookServiceImpl implements BookService {
                 .orElseThrow(() -> new AdventureBookException("Book not found with id: " + bookId, HttpStatus.NOT_FOUND));
         book.updateCategories(categories);
         var updatedBook = bookRepository.save(book);
-        return BookMapper.INSTANCE.toBookDTO(updatedBook);
+        return bookMapper.toBookDTO(updatedBook);
     }
 }

@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ConsequenceRepository extends JpaRepository<ConsequenceEntity, Long> {
+
+    ConsequenceEntity findConsequenceByOption_Id(Integer optionId);
+
 }
