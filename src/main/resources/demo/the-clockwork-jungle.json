@@ -1,0 +1,96 @@
+{
+    "title": "The Clockwork Jungle",
+    "author": "R. H. Sato",
+    "difficulty": "MEDIUM",
+    "sections": [
+      {
+        "sectionNumber": 1,
+        "text": "A mechanical vine wraps around the city gate. The inventor asks you to retrieve its seed from the jungle.",
+        "type": "BEGIN",
+        "options": [
+          {
+            "description": "Venture into the jungle with a machete.",
+            "nextSectionNumber": 2
+          },
+          {
+            "description": "Study the inventor's notes for a safer approach.",
+            "nextSectionNumber": 3
+          }
+        ]
+      },
+      {
+        "sectionNumber": 2,
+        "text": "The jungle is alive with ticking insects and humming trees.",
+        "type": "NODE",
+        "options": [
+          {
+            "description": "Follow the humming to a clearing.",
+            "nextSectionNumber": 4
+          },
+          {
+            "description": "Avoid the humming and climb a tree to scout.",
+            "nextSectionNumber": 5
+          }
+        ]
+      },
+      {
+        "sectionNumber": 3,
+        "text": "Notes reveal the seed responds to rhythm. You craft a small drum to attract it.",
+        "type": "NODE",
+        "options": [
+          {
+            "description": "Use the drum in the jungle clearing.",
+            "nextSectionNumber": 4
+          },
+          {
+            "description": "Bring the drum to the inventor and ask for help.",
+            "nextSectionNumber": 6
+          }
+        ]
+      },
+      {
+        "sectionNumber": 4,
+        "text": "The seed appears, pulsing to your rhythm, but a mechanical jaguar prowls nearby.",
+        "type": "NODE",
+        "options": [
+          {
+            "description": "Distract the jaguar with a thrown rattle.",
+            "nextSectionNumber": 7,
+            "consequence": {
+              "type": "LOSE_HEALTH",
+              "value": 2,
+              "text": "The jaguar swipes you as it turns."
+            }
+          },
+          {
+            "description": "Calmly play the drum and coax the seed closer.",
+            "nextSectionNumber": 8
+          }
+        ]
+      },
+      {
+        "sectionNumber": 5,
+        "text": "From the treetop you spot a hidden grove and a safe path to the seed.",
+        "type": "END",
+        "options": []
+      },
+      {
+        "sectionNumber": 6,
+        "text": "The inventor arrives with a net. Together you retrieve the seed and return as heroes.",
+        "type": "END",
+        "options": []
+      },
+      {
+        "sectionNumber": 7,
+        "text": "You escape with the seed but bear a scar. The city celebrates your bravery.",
+        "type": "END",
+        "options": []
+      },
+      {
+        "sectionNumber": 8,
+        "text": "The seed bonds with your drum and grows into a guardian vine that protects the city.",
+        "type": "END",
+        "options": []
+      }
+    ]
+  }

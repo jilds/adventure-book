@@ -1,0 +1,81 @@
+{
+    "title": "The Whispering Ruins",
+    "author": "S. I. Kwan",
+    "difficulty": "MEDIUM",
+    "sections": [
+      {
+        "sectionNumber": 1,
+        "text": "Ancient ruins in the desert are said to whisper secrets to those who listen at dusk.",
+        "type": "BEGIN",
+        "options": [
+          {
+            "description": "Camp at the ruins and listen at dusk.",
+            "nextSectionNumber": 2
+          },
+          {
+            "description": "Explore the ruins by daylight for inscriptions.",
+            "nextSectionNumber": 3
+          }
+        ]
+      },
+      {
+        "sectionNumber": 2,
+        "text": "At dusk the ruins murmur a direction toward a buried doorway.",
+        "type": "NODE",
+        "options": [
+          {
+            "description": "Dig where the ruins point.",
+            "nextSectionNumber": 4
+          },
+          {
+            "description": "Mark the spot and return with tools in the morning.",
+            "nextSectionNumber": 5
+          }
+        ]
+      },
+      {
+        "sectionNumber": 3,
+        "text": "Daylight reveals pictographs that hint at a guardian spirit bound to the doorway.",
+        "type": "NODE",
+        "options": [
+          {
+            "description": "Attempt to free the spirit.",
+            "nextSectionNumber": 6,
+            "consequence": {
+              "type": "GAIN_HEALTH",
+              "value": 2,
+              "text": "The spirit blesses you with renewed vigor."
+            }
+          },
+          {
+            "description": "Respect the binding and leave it undisturbed.",
+            "nextSectionNumber": 7
+          }
+        ]
+      },
+      {
+        "sectionNumber": 4,
+        "text": "You unearth the doorway and a cool breeze flows from below, carrying the scent of rain.",
+        "type": "END",
+        "options": []
+      },
+      {
+        "sectionNumber": 5,
+        "text": "Returning with tools, you find the doorway already open and a single footprint leading inside.",
+        "type": "END",
+        "options": []
+      },
+      {
+        "sectionNumber": 6,
+        "text": "Freeing the spirit reveals a hidden oasis and a guardian who becomes your ally.",
+        "type": "END",
+        "options": []
+      },
+      {
+        "sectionNumber": 7,
+        "text": "You leave the binding intact. The ruins remain a quiet place of mystery for future travelers.",
+        "type": "END",
+        "options": []
+      }
+    ]
+  }

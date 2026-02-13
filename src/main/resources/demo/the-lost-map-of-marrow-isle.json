@@ -1,0 +1,132 @@
+{
+    "title": "The Lost Map of Marrow Isle",
+    "author": "A. R. Vale",
+    "difficulty": "MEDIUM",
+    "sections": [
+      {
+        "sectionNumber": 1,
+        "text": "You find an old map tucked inside a library book. The ink shows an island with a single X.",
+        "type": "BEGIN",
+        "options": [
+          {
+            "description": "Follow the map to the harbor and hire a small boat.",
+            "nextSectionNumber": 2
+          },
+          {
+            "description": "Ignore the map and research the island in the library.",
+            "nextSectionNumber": 3
+          }
+        ]
+      },
+      {
+        "sectionNumber": 2,
+        "text": "The boatman warns of storms. Midway, waves toss the boat and a crate breaks loose.",
+        "type": "NODE",
+        "options": [
+          {
+            "description": "Try to secure the crate and help the boatman.",
+            "nextSectionNumber": 4,
+            "consequence": {
+              "type": "LOSE_HEALTH",
+              "value": 2,
+              "text": "You cut your hand on splintered wood."
+            }
+          },
+          {
+            "description": "Let the boatman handle it and hold on tight.",
+            "nextSectionNumber": 5
+          }
+        ]
+      },
+      {
+        "sectionNumber": 3,
+        "text": "Records show the island was once a lighthouse station. A journal mentions a hidden cave.",
+        "type": "NODE",
+        "options": [
+          {
+            "description": "Head to the harbor with the new clue.",
+            "nextSectionNumber": 2
+          },
+          {
+            "description": "Search the journal for a name to ask about the island.",
+            "nextSectionNumber": 6
+          }
+        ]
+      },
+      {
+        "sectionNumber": 4,
+        "text": "Your quick action saves the boat. The boatman offers to share a secret: the island has a guardian.",
+        "type": "NODE",
+        "options": [
+          {
+            "description": "Ask about the guardian and press on to the island.",
+            "nextSectionNumber": 7
+          },
+          {
+            "description": "Decide the risk is too great and return home.",
+            "nextSectionNumber": 8
+          }
+        ]
+      },
+      {
+        "sectionNumber": 5,
+        "text": "You arrive at the island. At the shore you see footprints leading into dense trees.",
+        "type": "NODE",
+        "options": [
+          {
+            "description": "Follow the footprints.",
+            "nextSectionNumber": 9
+          },
+          {
+            "description": "Explore the rocky coast instead.",
+            "nextSectionNumber": 10
+          }
+        ]
+      },
+      {
+        "sectionNumber": 6,
+        "text": "The journal mentions a keeper named Mara who vanished. A note hints she hid something to protect it.",
+        "type": "NODE",
+        "options": [
+          {
+            "description": "Find Mara's descendants in town for more information.",
+            "nextSectionNumber": 11
+          },
+          {
+            "description": "Use the journal's map to go directly to the island.",
+            "nextSectionNumber": 2
+          }
+        ]
+      },
+      {
+        "sectionNumber": 7,
+        "text": "In the island's heart you meet a stone guardian who tests your intent. You pass by showing respect.",
+        "type": "END",
+        "options": []
+      },
+      {
+        "sectionNumber": 8,
+        "text": "You return home safely but wonder what might have been. The map remains a mystery.",
+        "type": "END",
+        "options": []
+      },
+      {
+        "sectionNumber": 9,
+        "text": "Footprints lead to a hidden cave where the lost treasure glows faintly. You claim the map's secret.",
+        "type": "END",
+        "options": []
+      },
+      {
+        "sectionNumber": 10,
+        "text": "On the rocks you find a washed-up chest, but it's empty—except for a note: 'The real treasure is the story.'",
+        "type": "END",
+        "options": []
+      },
+      {
+        "sectionNumber": 11,
+        "text": "Mara's granddaughter gives you a key and a warning: some things are better left guarded.",
+        "type": "END",
+        "options": []
+      }
+    ]
+  }

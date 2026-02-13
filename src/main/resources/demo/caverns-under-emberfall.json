@@ -1,0 +1,141 @@
+{
+    "title": "Caverns Under Emberfall",
+    "author": "Lina Cortez",
+    "difficulty": "HARD",
+    "sections": [
+      {
+        "sectionNumber": 1,
+        "text": "A tremor reveals a new entrance to the Emberfall caverns beneath your town.",
+        "type": "BEGIN",
+        "options": [
+          {
+            "description": "Gather a team and enter the caverns.",
+            "nextSectionNumber": 2
+          },
+          {
+            "description": "Report the entrance to the town council.",
+            "nextSectionNumber": 3
+          }
+        ]
+      },
+      {
+        "sectionNumber": 2,
+        "text": "Inside, the air is hot and the path splits into three tunnels.",
+        "type": "NODE",
+        "options": [
+          {
+            "description": "Take the left tunnel with faint blue light.",
+            "nextSectionNumber": 4
+          },
+          {
+            "description": "Take the center tunnel with echoing drips.",
+            "nextSectionNumber": 5
+          },
+          {
+            "description": "Take the right tunnel with warm gusts.",
+            "nextSectionNumber": 6
+          }
+        ]
+      },
+      {
+        "sectionNumber": 3,
+        "text": "The council forbids exploration. You must decide whether to obey or sneak out at night.",
+        "type": "NODE",
+        "options": [
+          {
+            "description": "Obey the council and stay away.",
+            "nextSectionNumber": 7
+          },
+          {
+            "description": "Sneak out with a lantern and rope.",
+            "nextSectionNumber": 2
+          }
+        ]
+      },
+      {
+        "sectionNumber": 4,
+        "text": "The blue light is from crystals. One shatters and sprays shards.",
+        "type": "NODE",
+        "options": [
+          {
+            "description": "Shield your face and press on.",
+            "nextSectionNumber": 8,
+            "consequence": {
+              "type": "LOSE_HEALTH",
+              "value": 3,
+              "text": "Glass-like shards cut your arm."
+            }
+          },
+          {
+            "description": "Retreat and try another tunnel.",
+            "nextSectionNumber": 2
+          }
+        ]
+      },
+      {
+        "sectionNumber": 5,
+        "text": "The drips lead to an underground lake with a small boat tied to a post.",
+        "type": "NODE",
+        "options": [
+          {
+            "description": "Use the boat to cross the lake.",
+            "nextSectionNumber": 9
+          },
+          {
+            "description": "Search the shore for another path.",
+            "nextSectionNumber": 10
+          }
+        ]
+      },
+      {
+        "sectionNumber": 6,
+        "text": "Warm gusts carry the scent of sulfur. You find a sleeping fire-serpent curled around a glowing egg.",
+        "type": "NODE",
+        "options": [
+          {
+            "description": "Try to steal the egg quietly.",
+            "nextSectionNumber": 11,
+            "consequence": {
+              "type": "LOSE_HEALTH",
+              "value": 5,
+              "text": "The serpent wakes and scorches you."
+            }
+          },
+          {
+            "description": "Back away slowly and leave the egg.",
+            "nextSectionNumber": 2
+          }
+        ]
+      },
+      {
+        "sectionNumber": 7,
+        "text": "You obey the council. Months later, the town prospers as the caverns remain sealed.",
+        "type": "END",
+        "options": []
+      },
+      {
+        "sectionNumber": 8,
+        "text": "Despite the injury, you reach a chamber of ancient machinery that hints at a lost civilization.",
+        "type": "END",
+        "options": []
+      },
+      {
+        "sectionNumber": 9,
+        "text": "Crossing the lake, you discover a subterranean city and become its first visitor in centuries.",
+        "type": "END",
+        "options": []
+      },
+      {
+        "sectionNumber": 10,
+        "text": "A hidden tunnel leads you to a cache of old maps and a safe route out—knowledge to protect your town.",
+        "type": "END",
+        "options": []
+      },
+      {
+        "sectionNumber": 11,
+        "text": "You fail to take the egg. The serpent's fury forces a hasty retreat; you survive but are forever marked.",
+        "type": "END",
+        "options": []
+      }
+    ]
+  }

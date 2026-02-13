@@ -52,4 +52,11 @@ public class BookController {
         return ResponseEntity.ok(bookResposeDTO);
     }
 
+    @Operation(summary = "Has no idea, load some demos to play and enjoy adventure")
+    @GetMapping(value = "/load-demo", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<BookResposeDTO>> loadDemoBooks() {
+        List<BookResposeDTO> bookResposeDTO = bookService.loadDemo();
+        return new ResponseEntity<>(bookResposeDTO, HttpStatus.CREATED);
+    }
+
 }

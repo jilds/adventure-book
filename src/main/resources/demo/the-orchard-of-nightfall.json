@@ -1,0 +1,75 @@
+{
+    "title": "The Orchard of Nightfall",
+    "author": "I. M. Reyes",
+    "difficulty": "MEDIUM",
+    "sections": [
+      {
+        "sectionNumber": 1,
+        "text": "An orchard bears fruit only at night. The fruit grants a single memory to those who eat it.",
+        "type": "BEGIN",
+        "options": [
+          {
+            "description": "Pick a fruit to recover a lost memory.",
+            "nextSectionNumber": 2
+          },
+          {
+            "description": "Guard the orchard from poachers instead.",
+            "nextSectionNumber": 3
+          }
+        ]
+      },
+      {
+        "sectionNumber": 2,
+        "text": "The memory you retrieve is bittersweet and reveals a choice you once avoided.",
+        "type": "NODE",
+        "options": [
+          {
+            "description": "Act on the memory and seek reconciliation.",
+            "nextSectionNumber": 4,
+            "consequence": {
+              "type": "GAIN_HEALTH",
+              "value": 2,
+              "text": "Emotional healing strengthens you."
+            }
+          },
+          {
+            "description": "Keep the memory private and move on.",
+            "nextSectionNumber": 5
+          }
+        ]
+      },
+      {
+        "sectionNumber": 3,
+        "text": "You fend off poachers and earn the orchard's trust; it offers you a single fruit as thanks.",
+        "type": "NODE",
+        "options": [
+          {
+            "description": "Accept the fruit.",
+            "nextSectionNumber": 2
+          },
+          {
+            "description": "Refuse and leave the orchard untouched.",
+            "nextSectionNumber": 6
+          }
+        ]
+      },
+      {
+        "sectionNumber": 4,
+        "text": "Reconciliation brings peace. The orchard's keeper blesses your path forward.",
+        "type": "END",
+        "options": []
+      },
+      {
+        "sectionNumber": 5,
+        "text": "You carry the memory quietly. Life continues with a new, private clarity.",
+        "type": "END",
+        "options": []
+      },
+      {
+        "sectionNumber": 6,
+        "text": "You leave the orchard untouched. Its secrets remain for another night.",
+        "type": "END",
+        "options": []
+      }
+    ]
+  }

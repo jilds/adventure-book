@@ -1,0 +1,70 @@
+{
+    "title": "Echoes of the Iron Coast",
+    "author": "P. L. Navarro",
+    "difficulty": "MEDIUM",
+    "sections": [
+      {
+        "sectionNumber": 1,
+        "text": "Shipwrecks along the Iron Coast whisper of a bell that can call lost sailors home.",
+        "type": "BEGIN",
+        "options": [
+          {
+            "description": "Search the wrecks at low tide.",
+            "nextSectionNumber": 2
+          },
+          {
+            "description": "Interview old sailors at the tavern for clues.",
+            "nextSectionNumber": 3
+          }
+        ]
+      },
+      {
+        "sectionNumber": 2,
+        "text": "Among the wreckage you find a rusted bell half-buried in sand.",
+        "type": "NODE",
+        "options": [
+          {
+            "description": "Polish the bell and ring it.",
+            "nextSectionNumber": 4
+          },
+          {
+            "description": "Take the bell to the lighthouse keeper for study.",
+            "nextSectionNumber": 5
+          }
+        ]
+      },
+      {
+        "sectionNumber": 3,
+        "text": "Sailors tell tales of a bell that answers only to those with true loss in their hearts.",
+        "type": "NODE",
+        "options": [
+          {
+            "description": "Reflect on your own losses and return to the wreck.",
+            "nextSectionNumber": 2
+          },
+          {
+            "description": "Decide the bell is superstition and move on.",
+            "nextSectionNumber": 6
+          }
+        ]
+      },
+      {
+        "sectionNumber": 4,
+        "text": "The bell's ring echoes across the sea. A ghostly ship appears and a grateful crew thanks you.",
+        "type": "END",
+        "options": []
+      },
+      {
+        "sectionNumber": 5,
+        "text": "The keeper studies the bell and discovers it is a relic of an old navigation guild.",
+        "type": "END",
+        "options": []
+      },
+      {
+        "sectionNumber": 6,
+        "text": "You leave the coast with no answers, but the sea keeps its secrets.",
+        "type": "END",
+        "options": []
+      }
+    ]
+  }
