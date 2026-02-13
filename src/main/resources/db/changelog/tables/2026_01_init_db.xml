@@ -10,7 +10,7 @@
         <sql>CREATE TYPE category AS ENUM ('FICTION', 'SCIENCE', 'HORROR', 'ADVENTURE', 'FANTASY')</sql>
         <sql>CREATE TYPE difficulty AS ENUM ('EASY', 'MEDIUM', 'HARD')</sql>
         <sql>CREATE TYPE consequence_type AS ENUM ('GAIN_HEALTH', 'LOSE_HEALTH')</sql>
-        <sql>CREATE TYPE adventure_status AS ENUM ('IN_PROGRESS', 'WINNER', 'LOSE', 'QUIT')</sql>
+        <sql>CREATE TYPE adventure_status AS ENUM ('IN_PROGRESS', 'COMPLETE', 'LOSE', 'QUIT')</sql>
     </changeSet>
 
     <!--INIT USER TABLE-->

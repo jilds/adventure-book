@@ -16,4 +16,6 @@ public interface BookService {
     BookResposeDTO getBookDetails(Integer bookId);
 
     BookResposeDTO patchBookCategory(Integer bookId, List<Category> categories);
+
+    List<BookResposeDTO> loadDemo();
 }

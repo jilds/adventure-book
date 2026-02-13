@@ -76,16 +76,20 @@ public class AdventureServiceImpl implements AdventureService {
 
     @Override
     public AdventurePlayResponseDTO playAdventure(AdventurePlayRequestDTO adventurePlayRequestDTO) {
-        var adventureEntity = adventureRepository.findById(adventurePlayRequestDTO.getAdventureId())
-                .orElseThrow(() -> new ValidationException("Adventure with id " + adventurePlayRequestDTO.getAdventureId() + " does not exist"));
+        var adventureEntity = loadAdventureEntity(adventurePlayRequestDTO.getAdventureId());
+
+        adventureEntity.handleNextSection(adventurePlayRequestDTO.getNextSectionNumber());
 
         var section = sectionService.getSectionByBookIdAndSectionNumber(adventureEntity.getBook().getId(), adventurePlayRequestDTO.getNextSectionNumber());
 
+        adventureEntity.setCurrentSectionId(section.getId());
+        if (section.getType() == SectionType.END) {
+            adventureEntity.setStatus(AdventureStatus.COMPLETE);
+        }
+        adventureRepository.save(adventureEntity);
+
         var adventurePlayResponseDTO = adventureMapper.toAdventurePlayResponseDTO(adventureEntity);
         adventurePlayResponseDTO.setSection(section);
-
-        adventureEntity.setCurrentSectionId(section.getId());
-        adventureRepository.save(adventureEntity);
 
         return adventurePlayResponseDTO;
     }

@@ -67,4 +67,11 @@ public class BookServiceImpl implements BookService {
         var updatedBook = bookRepository.save(book);
         return bookMapper.toBookDTO(updatedBook);
     }
+
+    @Override
+    public List<BookResposeDTO> loadDemo() {
+
+
+        return List.of();
+    }
 }

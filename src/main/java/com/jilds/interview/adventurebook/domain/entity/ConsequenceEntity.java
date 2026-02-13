@@ -29,7 +29,7 @@ public class ConsequenceEntity {
     @Column(columnDefinition = "consequence")
     private Consequence type;
 
-    private Long value;
+    private Integer value;
 
     @ManyToOne
     private OptionEntity option;

@@ -1,6 +1,9 @@
 package com.jilds.interview.adventurebook.domain.entity;
 
 import com.jilds.interview.adventurebook.domain.enums.AdventureStatus;
+import com.jilds.interview.adventurebook.domain.enums.Consequence;
+import com.jilds.interview.adventurebook.domain.enums.SectionType;
+import com.jilds.interview.adventurebook.exception.AdventureBookException;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,6 +11,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.type.SqlTypes;
+import org.springframework.http.HttpStatus;
+import org.springframework.util.ObjectUtils;
 
 import java.time.Instant;
 
@@ -15,6 +20,7 @@ import java.time.Instant;
 @Setter
 @Entity
 @Table(name = "adventure")
+
 public class AdventureEntity {
 
     @Id
@@ -48,15 +54,38 @@ public class AdventureEntity {
     @Transient
     private SectionEntity currentSection;
 
-    public void loseHealthPoints(Integer points) {
-        this.healthPoints -= points;
-        if (this.healthPoints <= 0) {
-            this.status = AdventureStatus.LOSE;
+    public void handleNextSection(Integer nextSectionNumber) {
+        if (!ObjectUtils.isEmpty(currentSection) && !ObjectUtils.isEmpty(currentSection.getOptions())) {
+            this.isNextSectionValid(nextSectionNumber);
+            this.handleConsequence(nextSectionNumber);
         }
     }
 
-    public void increaseHealthPoints(Integer points) {
-        this.healthPoints += points;
+    private void handleConsequence(Integer nextSectionNumber) {
+        var consequence = currentSection
+                .getOptions().stream()
+                .filter(option -> option.getNextSectionNumber().equals(nextSectionNumber))
+                .map(OptionEntity::getConsequence)
+                .filter(c -> !ObjectUtils.isEmpty(c))
+                .findFirst();
+
+        if (consequence.isPresent()) {
+            if (consequence.get().getType().equals(Consequence.LOSE_HEALTH)) {
+                this.healthPoints -= consequence.get().getValue();
+                if (this.healthPoints <= 0) {
+                    this.status = AdventureStatus.LOSE;
+                }
+            } else if (consequence.get().getType().equals(Consequence.GAIN_HEALTH)) {
+                this.healthPoints += consequence.get().getValue();
+            }
+        }
     }
 
+    private void isNextSectionValid(Integer nextSectionNumber) {
+        var matchResult = currentSection.getOptions().stream()
+                .anyMatch(option -> option.getNextSectionNumber().equals(nextSectionNumber));
+        if (!matchResult) {
+            throw new AdventureBookException("Invalid next section number", HttpStatus.BAD_REQUEST);
+        }
+    }
 }
