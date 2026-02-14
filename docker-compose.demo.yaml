@@ -1,0 +1,47 @@
+services:
+  adventure-book-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: s:latest
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - DB_URL=jdbc:postgresql://adventure-book-db:5432/adventure-book
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
+    depends_on:
+      adventure-book-db:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - adventure-book-net
+
+  adventure-book-db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: adventure-book
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+      - adventure_book_pg_data:/var/lib/postgresql/data
+    networks:
+      - adventure-book-net
+
+volumes:
+  adventure_book_pg_data: { }
+
+networks:
+  adventure-book-net:
+    driver: bridge
+

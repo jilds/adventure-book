@@ -1,0 +1,58 @@
+name: Post Merge
+
+run-name: ${{ github.ref_name }}-${{ github.run_number }} ${{ github.workflow }}
+
+# triggers when a pull-request is merged to the develop branch
+on:
+  pull_request_target: # pull-request merged
+    branches:
+      - 'develop'
+      - 'main'
+    types:
+      - 'closed'
+
+env:
+  APP_NAME: adventure-book
+  DOCKER_REGISTRY: ${{ secrets.AZURE_REGISTRY_URL }}
+
+jobs:
+  post-merge:
+    if: ${{ (github.event.pull_request.merged == true) }}
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write #This is required for requesting the JWT
+      contents: read #This is required for actions/checkout
+    steps:
+      - name: Checkout the source code
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Setup Java
+        uses: actions/setup-java@c5195efecf7bdfc987ee8bae7a71cb8b11521c00 # v4.7.1
+        with:
+          distribution: 'temurin'
+          java-version: 25
+
+      - name: Change Version
+        id: get_version
+        run: |
+          version=${{ github.ref_name }}.${{ github.run_number }}-SNAPSHOT
+          mvn versions:set -DnewVersion=$version
+          echo "version=$version" >> $GITHUB_OUTPUT
+
+      - name: Maven Build
+        run: mvn clean install -DskipTests
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Docker Build and Push
+        run: |
+          echo "Building Img Name: ${image_name_r} with tag: ${image_tag_r}"
+          docker build . -t ${image_name_r}:${image_tag_r}
+          docker image tag ${image_name_r}:${image_tag_r} ${image_name_r}:latest
+#          docker image push --all-tags ${image_name_r}
+        env:
+          image_name_r: "${{ env.DOCKER_REGISTRY }}/${{env.APP_NAME}}"
+          image_tag_r: ${{ steps.get_version.outputs.version }}

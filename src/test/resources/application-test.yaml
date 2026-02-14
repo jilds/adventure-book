@@ -1,0 +1,8 @@
+server:
+  shutdown: immediate
+  port: 8080
+
+spring:
+  liquibase:
+    enabled: false
+

@@ -2,7 +2,6 @@ package com.jilds.interview.adventurebook.domain.entity;
 
 import com.jilds.interview.adventurebook.domain.enums.AdventureStatus;
 import com.jilds.interview.adventurebook.domain.enums.Consequence;
-import com.jilds.interview.adventurebook.domain.enums.SectionType;
 import com.jilds.interview.adventurebook.exception.AdventureBookException;
 import jakarta.persistence.*;
 import lombok.Getter;

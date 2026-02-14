@@ -6,7 +6,6 @@ import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
-import java.util.List;
 import java.util.Objects;
 
 @Mapper(
@@ -19,9 +18,6 @@ public interface SectionMapper {
 
     SectionDTO toSectionDTO(SectionEntity sectionEntity);
 
-    List<SectionDTO> toSectionDTOList(List<SectionEntity> sectionEntities);
-
     SectionEntity toSectionEntity(SectionDTO sectionDTO);
 
-    List<SectionEntity> toSectionEntityList(List<SectionDTO> sectionDTOS);
 }
