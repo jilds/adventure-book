@@ -1,0 +1,266 @@
+{
+  "title": "The Lost Lantern of Asterfall",
+  "author": "Jonathan & Copilot",
+  "difficulty": "MEDIUM",
+  "sections": [
+    {
+      "sectionNumber": 1,
+      "text": "You stand at the moss‑covered gates of Asterfall Forest, a place whispered about in every tavern from here to the coast. Deep within lies the Lost Lantern, an artifact said to reveal hidden truths. The wind carries a faint glow between the trees, almost inviting you in.",
+      "type": "BEGIN",
+      "options": [
+        {
+          "description": "Enter the forest and follow the strange glow.",
+          "nextSectionNumber": 2
+        },
+        {
+          "description": "Circle around the forest edge to search for a safer path.",
+          "nextSectionNumber": 3,
+          "consequence": {
+            "type": "GAIN_HEALTH",
+            "value": 1,
+            "text": "You take a moment to breathe and prepare yourself."
+          }
+        }
+      ]
+    },
+    {
+      "sectionNumber": 2,
+      "text": "The glow leads you to a fork in the path. To the left, you hear rushing water. To the right, the glow intensifies, pulsing like a heartbeat.",
+      "type": "NODE",
+      "options": [
+        {
+          "description": "Head toward the sound of water.",
+          "nextSectionNumber": 4
+        },
+        {
+          "description": "Follow the pulsing glow deeper into the woods.",
+          "nextSectionNumber": 5,
+          "consequence": {
+            "type": "LOSE_HEALTH",
+            "value": 2,
+            "text": "The air grows heavy and draining as you push forward."
+          }
+        }
+      ]
+    },
+    {
+      "sectionNumber": 3,
+      "text": "You find an old hunter’s trail. It’s quiet—too quiet. A set of fresh tracks leads into a thicket, while the trail itself continues toward a rocky ridge.",
+      "type": "NODE",
+      "options": [
+        {
+          "description": "Investigate the fresh tracks.",
+          "nextSectionNumber": 6
+        },
+        {
+          "description": "Stay on the trail toward the ridge.",
+          "nextSectionNumber": 7
+        }
+      ]
+    },
+    {
+      "sectionNumber": 4,
+      "text": "You reach a shimmering river. A stone bridge crosses it, but beneath the water you spot something glowing faintly. The current looks strong.",
+      "type": "NODE",
+      "options": [
+        {
+          "description": "Cross the bridge safely.",
+          "nextSectionNumber": 8
+        },
+        {
+          "description": "Dive into the river to investigate the glow.",
+          "nextSectionNumber": 9,
+          "consequence": {
+            "type": "LOSE_HEALTH",
+            "value": 3,
+            "text": "The icy current slams into you as you dive."
+          }
+        }
+      ]
+    },
+    {
+      "sectionNumber": 5,
+      "text": "The glow leads you to a clearing where the Lost Lantern floats above an ancient pedestal. As you approach, shadowy figures rise from the ground, blocking your path.",
+      "type": "NODE",
+      "options": [
+        {
+          "description": "Attempt to speak to the shadowy figures.",
+          "nextSectionNumber": 10
+        },
+        {
+          "description": "Charge forward and grab the Lantern.",
+          "nextSectionNumber": 11,
+          "consequence": {
+            "type": "LOSE_HEALTH",
+            "value": 5,
+            "text": "The shadows lash out as you rush past them."
+          }
+        }
+      ]
+    },
+    {
+      "sectionNumber": 6,
+      "text": "The tracks belong to a massive stag with silver antlers. It watches you calmly, then bows its head as if offering guidance.",
+      "type": "NODE",
+      "options": [
+        {
+          "description": "Follow the stag.",
+          "nextSectionNumber": 12,
+          "consequence": {
+            "type": "GAIN_HEALTH",
+            "value": 3,
+            "text": "A soothing warmth surrounds you as you follow the creature."
+          }
+        },
+        {
+          "description": "Retreat back to the trail.",
+          "nextSectionNumber": 7
+        }
+      ]
+    },
+    {
+      "sectionNumber": 7,
+      "text": "The ridge overlooks the entire forest. From here, you spot a beam of light piercing the canopy far below—the Lantern’s location.",
+      "type": "NODE",
+      "options": [
+        {
+          "description": "Climb down toward the beam of light.",
+          "nextSectionNumber": 5
+        },
+        {
+          "description": "Search the ridge for useful supplies.",
+          "nextSectionNumber": 13
+        }
+      ]
+    },
+    {
+      "sectionNumber": 8,
+      "text": "You cross safely and find a quiet grove. In the center lies a stone tablet with ancient runes. As you touch it, the forest shifts around you, revealing a hidden path.",
+      "type": "NODE",
+      "options": [
+        {
+          "description": "Take the hidden path.",
+          "nextSectionNumber": 5
+        },
+        {
+          "description": "Return to the riverbank.",
+          "nextSectionNumber": 4
+        }
+      ]
+    },
+    {
+      "sectionNumber": 9,
+      "text": "The current pulls you under. You grasp the glowing object—it’s a shard of the Lantern. With it, you break free and surface, gasping.",
+      "type": "NODE",
+      "options": [
+        {
+          "description": "Use the shard to track the Lantern.",
+          "nextSectionNumber": 5
+        },
+        {
+          "description": "Rest on the riverbank to recover.",
+          "nextSectionNumber": 14,
+          "consequence": {
+            "type": "GAIN_HEALTH",
+            "value": 2,
+            "text": "You catch your breath and regain some strength."
+          }
+        }
+      ]
+    },
+    {
+      "sectionNumber": 10,
+      "text": "The shadows pause. One steps forward and speaks: “Only the worthy may claim the Lantern. Prove your intent.”",
+      "type": "NODE",
+      "options": [
+        {
+          "description": "Declare your noble intentions.",
+          "nextSectionNumber": 15
+        },
+        {
+          "description": "Attempt to deceive them.",
+          "nextSectionNumber": 16,
+          "consequence": {
+            "type": "LOSE_HEALTH",
+            "value": 4,
+            "text": "The shadows recoil in anger at your deception."
+          }
+        }
+      ]
+    },
+    {
+      "sectionNumber": 11,
+      "text": "You rush forward, but the shadows overwhelm you. The forest fades into darkness. Your quest ends here.",
+      "type": "END",
+      "options": []
+    },
+    {
+      "sectionNumber": 12,
+      "text": "The stag leads you to a hidden glade where the Lantern rests peacefully. No guardians, no traps—just destiny.",
+      "type": "END",
+      "options": []
+    },
+    {
+      "sectionNumber": 13,
+      "text": "You find a sturdy rope and a small vial of healing herbs. These may prove useful later.",
+      "type": "NODE",
+      "options": [
+        {
+          "description": "Head toward the beam of light.",
+          "nextSectionNumber": 5
+        },
+        {
+          "description": "Explore deeper along the ridge.",
+          "nextSectionNumber": 17
+        }
+      ]
+    },
+    {
+      "sectionNumber": 14,
+      "text": "As you rest, the forest grows eerily silent. A whisper urges you to rise—the Lantern calls.",
+      "type": "NODE",
+      "options": [
+        {
+          "description": "Follow the whisper.",
+          "nextSectionNumber": 5
+        },
+        {
+          "description": "Ignore it and continue resting.",
+          "nextSectionNumber": 11
+        }
+      ]
+    },
+    {
+      "sectionNumber": 15,
+      "text": "The shadows bow and part, allowing you to approach. You grasp the Lantern, and its light fills you with clarity. You have proven worthy.",
+      "type": "END",
+      "options": []
+    },
+    {
+      "sectionNumber": 16,
+      "text": "Your deception is uncovered instantly. The shadows close in, and your journey ends in silence.",
+      "type": "END",
+      "options": []
+    },
+    {
+      "sectionNumber": 17,
+      "text": "You discover an ancient watchtower. Inside, a mural depicts the Lantern’s creation and its purpose—to guide lost souls to truth.",
+      "type": "NODE",
+      "options": [
+        {
+          "description": "Return to the forest to seek the Lantern.",
+          "nextSectionNumber": 5
+        },
+        {
+          "description": "Stay and study the mural further.",
+          "nextSectionNumber": 11,
+          "consequence": {
+            "type": "LOSE_HEALTH",
+            "value": 2,
+            "text": "The tower collapses unexpectedly as you linger too long."
+          }
+        }
+      ]
+    }
+  ]
+}

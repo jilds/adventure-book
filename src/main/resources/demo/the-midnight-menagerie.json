@@ -1,0 +1,60 @@
+{
+    "title": "The Midnight Menagerie",
+    "author": "Tessa Quill",
+    "difficulty": "EASY",
+    "sections": [
+      {
+        "sectionNumber": 1,
+        "text": "A traveling menagerie arrives with creatures that only appear at midnight.",
+        "type": "BEGIN",
+        "options": [
+          {
+            "description": "Sneak in after dark to see the creatures.",
+            "nextSectionNumber": 2
+          },
+          {
+            "description": "Volunteer to help the keeper during the day.",
+            "nextSectionNumber": 3
+          }
+        ]
+      },
+      {
+        "sectionNumber": 2,
+        "text": "At midnight the creatures sing. One small creature follows you home.",
+        "type": "NODE",
+        "options": [
+          {
+            "description": "Keep the creature and care for it.",
+            "nextSectionNumber": 4,
+            "consequence": {
+              "type": "GAIN_HEALTH",
+              "value": 1,
+              "text": "Its purr soothes your worries."
+            }
+          },
+          {
+            "description": "Return it to the menagerie.",
+            "nextSectionNumber": 5
+          }
+        ]
+      },
+      {
+        "sectionNumber": 3,
+        "text": "Helping the keeper you learn the creatures' needs and earn a small reward.",
+        "type": "END",
+        "options": []
+      },
+      {
+        "sectionNumber": 4,
+        "text": "The creature becomes your companion and leads you to small, joyful adventures.",
+        "type": "END",
+        "options": []
+      },
+      {
+        "sectionNumber": 5,
+        "text": "You return the creature. The keeper thanks you and offers a ticket to the next show.",
+        "type": "END",
+        "options": []
+      }
+    ]
+  }

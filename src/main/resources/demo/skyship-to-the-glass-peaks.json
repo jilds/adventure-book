@@ -1,0 +1,75 @@
+{
+    "title": "Skyship to the Glass Peaks",
+    "author": "M. K. Rowan",
+    "difficulty": "EASY",
+    "sections": [
+      {
+        "sectionNumber": 1,
+        "text": "A skyship captain offers you passage to the Glass Peaks in exchange for help with navigation.",
+        "type": "BEGIN",
+        "options": [
+          {
+            "description": "Accept and join the crew.",
+            "nextSectionNumber": 2
+          },
+          {
+            "description": "Decline and explore the market instead.",
+            "nextSectionNumber": 3
+          }
+        ]
+      },
+      {
+        "sectionNumber": 2,
+        "text": "Onboard, a storm approaches. The compass spins wildly.",
+        "type": "NODE",
+        "options": [
+          {
+            "description": "Calmly help the navigator recalibrate the compass.",
+            "nextSectionNumber": 4
+          },
+          {
+            "description": "Hide below deck until the storm passes.",
+            "nextSectionNumber": 5
+          }
+        ]
+      },
+      {
+        "sectionNumber": 3,
+        "text": "At the market you find a tinkerer selling a curious glass shard said to be from the Peaks.",
+        "type": "NODE",
+        "options": [
+          {
+            "description": "Buy the shard and seek the Peaks alone.",
+            "nextSectionNumber": 6,
+            "consequence": {
+              "type": "GAIN_HEALTH",
+              "value": 1,
+              "text": "The shard's warmth steadies your nerves."
+            }
+          },
+          {
+            "description": "Return to the harbor and accept the captain's offer.",
+            "nextSectionNumber": 2
+          }
+        ]
+      },
+      {
+        "sectionNumber": 4,
+        "text": "Your steady hands save the ship. The captain rewards you with a map to a hidden glacier cave.",
+        "type": "END",
+        "options": []
+      },
+      {
+        "sectionNumber": 5,
+        "text": "Below deck you miss the chance to steer; the ship drifts but the crew recovers. You learn humility.",
+        "type": "END",
+        "options": []
+      },
+      {
+        "sectionNumber": 6,
+        "text": "The shard leads you to a friendly hermit who guides you to a secret path up the Peaks.",
+        "type": "END",
+        "options": []
+      }
+    ]
+  }

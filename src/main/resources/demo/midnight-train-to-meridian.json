@@ -1,0 +1,76 @@
+{
+    "title": "Midnight Train to Meridian",
+    "author": "E. P. Noor",
+    "difficulty": "EASY",
+    "sections": [
+      {
+        "sectionNumber": 1,
+        "text": "A midnight train promises a one-night journey to Meridian, a city of wonders.",
+        "type": "BEGIN",
+        "options": [
+          {
+            "description": "Board the train and take a window seat.",
+            "nextSectionNumber": 2
+          },
+          {
+            "description": "Skip the train and wait for daylight travel.",
+            "nextSectionNumber": 3
+          }
+        ]
+      },
+      {
+        "sectionNumber": 2,
+        "text": "Onboard, a mysterious passenger offers you a sealed envelope with a riddle.",
+        "type": "NODE",
+        "options": [
+          {
+            "description": "Accept and solve the riddle.",
+            "nextSectionNumber": 4
+          },
+          {
+            "description": "Politely decline and watch the passing landscape.",
+            "nextSectionNumber": 5
+          }
+        ]
+      },
+      {
+        "sectionNumber": 3,
+        "text": "Daylight travel is calm but you miss the train's secret. Life goes on with small comforts.",
+        "type": "END",
+        "options": []
+      },
+      {
+        "sectionNumber": 4,
+        "text": "The riddle leads you to a hidden compartment under your seat containing a small key.",
+        "type": "NODE",
+        "options": [
+          {
+            "description": "Use the key at the train's observation car.",
+            "nextSectionNumber": 6
+          },
+          {
+            "description": "Keep the key and ask the passenger about it.",
+            "nextSectionNumber": 7
+          }
+        ]
+      },
+      {
+        "sectionNumber": 5,
+        "text": "You enjoy the scenery and arrive refreshed in Meridian with a new appreciation for quiet journeys.",
+        "type": "END",
+        "options": []
+      },
+      {
+        "sectionNumber": 6,
+        "text": "The key opens a chest of postcards from travelers who found new lives in Meridian.",
+        "type": "END",
+        "options": []
+      },
+      {
+        "sectionNumber": 7,
+        "text": "The passenger reveals they were testing your curiosity. They offer you a job as a guide in Meridian.",
+        "type": "END",
+        "options": []
+      }
+    ]
+  }

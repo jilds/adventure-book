@@ -1,0 +1,90 @@
+{
+    "title": "The River of Glass",
+    "author": "Jonah Mire",
+    "difficulty": "HARD",
+    "sections": [
+      {
+        "sectionNumber": 1,
+        "text": "A river of molten glass flows through a canyon. A village elder asks you to retrieve a shard from its source.",
+        "type": "BEGIN",
+        "options": [
+          {
+            "description": "Accept and prepare protective gear.",
+            "nextSectionNumber": 2
+          },
+          {
+            "description": "Refuse; the task is too dangerous.",
+            "nextSectionNumber": 3
+          }
+        ]
+      },
+      {
+        "sectionNumber": 2,
+        "text": "Approaching the canyon, heat shimmers and the path narrows to a single ledge.",
+        "type": "NODE",
+        "options": [
+          {
+            "description": "Cross the ledge carefully.",
+            "nextSectionNumber": 4
+          },
+          {
+            "description": "Search for a safer route downstream.",
+            "nextSectionNumber": 5
+          }
+        ]
+      },
+      {
+        "sectionNumber": 3,
+        "text": "You decline. The elder finds another and the village survives, but you wonder about courage.",
+        "type": "END",
+        "options": []
+      },
+      {
+        "sectionNumber": 4,
+        "text": "A sudden tremor cracks the ledge. You lose footing and burn your arm reaching for a handhold.",
+        "type": "NODE",
+        "options": [
+          {
+            "description": "Climb back to safety.",
+            "nextSectionNumber": 6,
+            "consequence": {
+              "type": "LOSE_HEALTH",
+              "value": 4,
+              "text": "Severe burns slow you down."
+            }
+          },
+          {
+            "description": "Push forward despite the pain.",
+            "nextSectionNumber": 7
+          }
+        ]
+      },
+      {
+        "sectionNumber": 5,
+        "text": "Downstream you find a narrow tunnel that leads under the river to a hidden chamber.",
+        "type": "NODE",
+        "options": [
+          {
+            "description": "Enter the tunnel.",
+            "nextSectionNumber": 7
+          },
+          {
+            "description": "Return and try the ledge again.",
+            "nextSectionNumber": 4
+          }
+        ]
+      },
+      {
+        "sectionNumber": 6,
+        "text": "You survive but are scarred. The shard you bring back is small but meaningful.",
+        "type": "END",
+        "options": []
+      },
+      {
+        "sectionNumber": 7,
+        "text": "At the source you find a crystalline heart that cools the river when touched. You return a hero.",
+        "type": "END",
+        "options": []
+      }
+    ]
+  }
